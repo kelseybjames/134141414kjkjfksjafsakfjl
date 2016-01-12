@@ -238,7 +238,7 @@ describe BattleBot do
     end
 
 
-    it "descreases the bot's health by the damage amount" do
+    it "decreases the bot's health by the damage amount" do
       expect { bot.take_damage(10) }.to change(bot, :health).by(-10)
     end
 
