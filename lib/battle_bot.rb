@@ -1,7 +1,6 @@
 class BattleBot
   @@count = 0
   attr_reader :name, :health, :enemies, :weapon
-  attr_accessor :count
 
   def initialize(name, health=100)
     @name = name
@@ -52,10 +51,12 @@ class BattleBot
   def take_damage(number)
     raise ArgumentError.new("Damage must be a number") unless number.is_a?(Fixnum)
     @health = [0, @health - number].max
+    dead?
+    @health
   end
 
   def defend_against(robot)
-    if (!robot.dead? && robot.has_weapon?)
+    if !dead? && has_weapon?
       attack(robot)
     end
   end
@@ -70,5 +71,9 @@ class BattleBot
 
   def has_weapon?
     @weapon == nil ? false : true
+  end
+
+  def self.count
+    @@count
   end
 end
